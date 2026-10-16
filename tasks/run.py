@@ -1,5 +1,5 @@
 import os
-os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
+# os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import shutil
@@ -131,6 +131,7 @@ if __name__ == '__main__':
     parser.add_argument('--threshold', type=float, default=0.0, help='threshold for traj similarity.')
     parser.add_argument('--use_projector', action='store_true', help='whether to use role projector.')
     parser.add_argument('--hop', type=int, default=1, help='hop for traj similarity.')
+    parser.add_argument('--num_tasks', type=int, default=None, help='Only run the first N tasks (default: all).')
 
     args = parser.parse_args()
 
@@ -149,6 +150,8 @@ if __name__ == '__main__':
     
     # run tasks
     task_configs: TaskManager = build_task(task, mas_type, mas_memory_type, max_trials)
+    if args.num_tasks is not None:
+        task_configs.tasks = task_configs.tasks[:args.num_tasks]
     task_configs.mas_config['successful_topk'] = args.successful_topk
     task_configs.mas_config['failed_topk'] = args.failed_topk
     task_configs.mas_config['insights_topk'] = args.insights_topk
