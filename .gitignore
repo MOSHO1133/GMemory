@@ -3,3 +3,4 @@ data/alfworld/json_2.1.1/
 data/alfworld/logic/
 data/alfworld/*.zip
 __pycache__/
+.db/
