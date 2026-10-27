@@ -127,7 +127,7 @@ if __name__ == '__main__':
     parser.add_argument('--max_trials', type=int, default=50, help='max number of steps')
     parser.add_argument('--successful_topk', type=int, default=1, help='Number of successful trajs to be retrieved from memory.')
     parser.add_argument('--failed_topk', type=int, default=0, help='Number of failed trajs to be retrieved from memory.')
-    parser.add_argument('--insights_topk', type=int, default=3, help='Number of insights to be retrieved from memory.')
+    parser.add_argument('--insights_topk', type=int, default=5, help='Number of insights to be retrieved from memory.')
     parser.add_argument('--threshold', type=float, default=0.0, help='threshold for traj similarity.')
     parser.add_argument('--use_projector', action='store_true', help='whether to use role projector.')
     parser.add_argument('--hop', type=int, default=1, help='hop for traj similarity.')

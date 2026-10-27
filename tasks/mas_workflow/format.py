@@ -51,7 +51,7 @@ def format_task_prompt_with_insights(
     user_prompt: str = task_solve_with_insights.format(
         few_shots='\n'.join(few_shots),
         memory_few_shots=memory_few_shots,
-        task_description=task_description,   
+        task_description=f'{temp}\n{task_description}',
         insights=existing_rules_text,
     )
 
