@@ -16,13 +16,26 @@ The paper says the Qwen models were run locally with Ollama but does not give a 
 
 ## As-released results (134 tasks)
 
-| | empty | g-memory |
-|---|---|---|
-| Ours | 48/134 (35.8%) | 37/134 (27.6%) |
-| Paper (Table 3, Qwen-2.5-7b) | 52.99% | 67.91% |
-| Authors' log (`logs/alfworld/`, **qwen2.5-14b**) | — | 115/134 (85.8%) |
+| | empty | g-memory | g-memory + projector |
+|---|---|---|---|
+| Ours | 48/134 (35.8%) | 37/134 (27.6%) | 51/134 (38.1%) |
+| Paper (Table 3, Qwen-2.5-7b) | 52.99% | 67.91% | 67.91% (the paper reports one G-Memory figure) |
+| Authors' log (`logs/alfworld/`, **qwen2.5-14b**) | — | 115/134 (85.8%) | |
 
 There is no author log for 7b on ALFWorld; the only one is 14b. Details are in `baseline_alfworld_qwen7b.md`.
+
+**Role projector.** `tasks/run.py` leaves the projector off unless `--use_projector` is passed, but it is part of the method in the paper. So the paper's 67.91% should be compared with the projector run, not with plain `g-memory`. The projector run uses the as-released prompt and otherwise the same settings as `g-memory` (successful_topk 1, failed_topk 0, insights_topk 3, threshold 0.0).
+
+| Projector run | Value |
+|---|---|
+| Success | 51/134 (38.1%) |
+| put / clean / heat / cool / examine / puttwo | 10/24, 12/31, 11/23, 13/21, 1/18, 4/17 |
+| Prompt / completion tokens | 11,972,356 / 278,471 |
+| Run time | 6123.54 s (102.1 min), 45.7 s per task |
+| Insights stored | 37 |
+| "Nothing happens" observations | 667 (vs 807 without the projector) |
+
+Turning the projector on adds 10.4 points over plain `g-memory` and puts G-Memory 2.2 points (3 tasks) above the no-memory baseline. That is still about 30 points short of the paper's figure.
 
 ## Setup changes needed to run the released code
 
@@ -83,4 +96,5 @@ In the as-released run the helper did diverge, but as prose ("Let's break out of
 ## Next steps
 
 - Isolate the two prompt changes with two 20-task runs (note only; `9. think` removal only).
+- Use `--use_projector` for all future G-Memory runs, since it is part of the paper's method.
 - Repeat runs with different seeds to measure the run-to-run spread.
