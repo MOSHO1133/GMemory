@@ -1,26 +1,18 @@
 task_solve_with_insights = """
-## Successful Examples (Reference Cases)
-Below are some examples of similar tasks that were successfully completed.  
-Please use these as references to guide your thinking and approach to the current task:
-
+## Here are some successful examples similar to the current problem:
 {few_shots}
----
 
-## Your Own Past Successes (Execution Patterns)
-Here are examples of successful execution processes you've previously used on similar tasks.  
-Pay special attention to the step-by-step procedures and strategies, especially when encountering obstacles:
-
+## Here are some successful execution processes you have carried out in tasks similar to the current one.
+Please carefully refer to their execution process, especially when you encounter difficulties:
 {memory_few_shots}
----
 
-## Key Insights from Related Tasks
-The following are insights gathered during the execution of similar tasks. You may refer to them during your task execution to improve problem-solving accuracy.
+(END OF EXAMPLES)
 
+## The following are some experience you gather on a similar task of completing a household task by interacting in a household environment.
+** Use these as references to help you perform this task and avoid unnecessory thinking**:
 {insights}
----
 
-## Your Turn: Take Action!
-Use the above examples and insights as a foundation, and now work on the following task:
+## Now it's your turn!
 {task_description}
 """
 
